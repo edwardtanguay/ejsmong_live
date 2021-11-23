@@ -7,7 +7,7 @@ const port = 3044;
 const staticDirectory = path.join(__dirname, './public');
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './public/views'));
+app.set('views', path.join(__dirname, './src/views'));
 app.use(express.static(staticDirectory));
 
 app.get('/', (req, res) => {
