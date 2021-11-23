@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 import * as SpeakersController from './controllers/speakersController.js';
-// import * as PresentationsController from './controllers/presentationsController.js';
+import * as PresentationsController from './controllers/presentationsController.js';
 
 mongoose.connect('mongodb://localhost:27017/mongoConference');
 
@@ -28,9 +28,10 @@ app.get('/speakers', async (req, res) => {
 	});
 });
 
-app.get('/presentations', (req, res) => {
+app.get('/presentations', async (req, res) => {
 	res.render('presentations', {
-		pageTitle: "Presentations"
+		pageTitle: "Presentations",
+		presentations: await PresentationsController.getAllPresentations()
 	});
 });
 
