@@ -1,13 +1,9 @@
 import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
+import * as SpeakersController from './controllers/speakersController.js';
 
 mongoose.connect('mongodb://localhost:27017/mongoConference');
-const speakerSchema = mongoose.Schema({
-	name: String,
-	country: String
-});
-const SpeakerModel = mongoose.model("Speaker", speakerSchema);
 
 const app = express();
 const __dirname = path.resolve(path.dirname(''));
@@ -26,10 +22,9 @@ app.get('/', (req, res) => {
 
 app.get('/speakers', (req, res) => {
 	(async () => {
-		const speakers = await SpeakerModel.find({});
 		res.render('speakers', {
 			pageTitle: "Speakers",
-			speakers
+			speakers: await SpeakersController.getAllSpeakers()
 		});
 	})();
 });
