@@ -15,9 +15,11 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './src/views'));
 app.use(express.static(staticDirectory));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 	res.render('index', {
-		pageTitle: "Welcome"
+		pageTitle: "Welcome",
+		speakers: await SpeakersController.getAllSpeakers(),
+		presentations: await PresentationsController.getAllPresentations()
 	});
 });
 
