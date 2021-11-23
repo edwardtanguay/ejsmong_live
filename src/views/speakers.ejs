@@ -4,8 +4,10 @@
 		<%=pageTitle%>
 	</h2>
 	<p>This page displays all the speakers at the conference.</p>
-	<p>
-		<%=speakers.length%>
-	</p>
+	<ul>
+		<% speakers.forEach(speaker => { %>
+			<li><%=speaker.name %></li>
+		<% }) %>
+	</ul>
 	<%- include('_footer.ejs')
 		%>
